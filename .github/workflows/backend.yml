@@ -26,7 +26,13 @@ jobs:
           vercel deploy --prod --yes --token ${{ secrets.VERCEL_TOKEN }}
           
  # -------- SMOKE TEST --------
-      - name: Smoke Test Backend Health
+      - name: Smoke Test Backend
         run: |
-          echo "Running backend health check..."
-          curl -f ${{ secrets.BACKEND_URL }}/health
+          echo "Checking backend health..."
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://vercel-backend-olive.vercel.app/health)
+          if [ "$STATUS" -ne 200 ]; then
+            echo "❌ Backend smoke test failed! Status: $STATUS"
+            exit 1
+          else
+            echo "✅ Backend smoke test passed! Status: $STATUS"
+          fi
