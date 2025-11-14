@@ -24,3 +24,9 @@ jobs:
         run: |
           npm install -g vercel
           vercel deploy --prod --yes --token ${{ secrets.VERCEL_TOKEN }}
+          
+ # -------- SMOKE TEST --------
+      - name: Smoke Test Backend Health
+        run: |
+          echo "Running backend health check..."
+          curl -f ${{ secrets.BACKEND_URL }}/health
