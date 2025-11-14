@@ -15,7 +15,7 @@ app.get("/health", (req, res) => {
 
 app.get("/api/data", (req, res) => {
   res.json([
-    { id: 1, msg: "Blue/Green CI/CD working fine" },
+    { id: 1, msg: "CI/CD Pipeline working fine" },
     { id: 2, msg: "Zero Downtime Simulation" }
   ]);
 });
